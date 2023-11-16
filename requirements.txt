@@ -1,6 +1,5 @@
 subprocess
+python-telegram-bot
 requests
-numpy
-pandas
 telebot==0.0.4
 pyTelegramBotAPI
