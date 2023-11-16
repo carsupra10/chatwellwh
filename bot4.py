@@ -1,34 +1,26 @@
+import telebot
 import requests
-import telegram
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 # Telegram bot token
 TOKEN = '6917650795:AAHRGwV4VaQflMUZ8JdA-vEcuEpRHhN8xKM'
 
-#qrcode api
+# QR code API
 qrcodeapi = 'https://api.qrserver.com/v1/create-qr-code/?size=1080x1080&data='
-def start(update, context):
-    update.message.reply_text('Please send the text for the URL.')
 
-# Define a function to handle text messages
-def text_input(update, context):
-    text = update.message.text  # Get the text sent by the user
-    # Assuming you want to create a URL with the user text
-    url = f"[{qrcodeapi}{text}]"
-    update.message.reply_text(f'{url}')
+# Create a bot instance
+bot = telebot.TeleBot(TOKEN)
 
-    
-def main():
-    updater = Updater(TOKEN, use_context=True)
-    dp = updater.dispatcher
+# Handler for the /start command
+@bot.message_handler(commands=['start'])
+def start(message):
+    bot.reply_to(message, 'Please send the text for the URL.')
 
-    # Command handler to trigger QR code generation
-    dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, text_input))
+# Handler for text messages
+@bot.message_handler(func=lambda message: True)
+def text_input(message):
+    text = message.text
+    url = f"{qrcodeapi}{text}"
+    bot.reply_to(message, url)
 
-
-    updater.start_polling()
-    updater.idle()
-
-if __name__ == '__main__':
-    main()
+# Polling updates
+bot.polling()
