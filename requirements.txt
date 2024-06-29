@@ -2,3 +2,4 @@ python-telegram-bot
 requests
 telebot==0.0.4
 pyTelegramBotAPI
+gunicorn
