@@ -3,7 +3,7 @@ import time
 from telebot import apihelper
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 
-bot = telebot.TeleBot("6268369826:AAHrv4JLOIGW_yqke9T3n1yX3F0VKulzfe0")
+bot = telebot.TeleBot("6626470167:AAFQN_9n_S1nZNSRY2poah3RAGnLGG4g4g8")
 waiting_list = []
 chat_sessions = {}
 blocker_enabled = False
